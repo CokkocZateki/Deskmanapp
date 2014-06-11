@@ -1,0 +1,41 @@
+<%= form_for(@shift) do |f| %>
+  <% if @shift.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
+
+      <ul>
+      <% @shift.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start %><br>
+    <%= f.datetime_select :start %>
+  </div>
+  <div class="field">
+    <%= f.label :end %><br>
+    <%= f.datetime_select :end %>
+  </div>
+  <div class="field">
+    <%= f.label :desk %><br>
+    <%= f.text_field :desk %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br>
+    <%= f.text_field :user %>
+  </div>
+  <div class="field">
+    <%= f.label :specialpay %><br>
+    <%= f.check_box :specialpay %>
+  </div>
+  <div class="field">
+    <%= f.label :graveyardshift %><br>
+    <%= f.check_box :graveyardshift %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

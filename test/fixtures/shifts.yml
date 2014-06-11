@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start: 2014-06-01 17:21:27
+  end: 2014-06-01 17:21:27
+  desk: MyString
+  user: MyString
+  specialpay: false
+  graveyardshift: false
+
+two:
+  start: 2014-06-01 17:21:27
+  end: 2014-06-01 17:21:27
+  desk: MyString
+  user: MyString
+  specialpay: false
+  graveyardshift: false
