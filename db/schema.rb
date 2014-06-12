@@ -11,17 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601212127) do
+ActiveRecord::Schema.define(version: 20140612211232) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "shifts", force: true do |t|
-    t.datetime "start"
-    t.datetime "end"
     t.string   "desk"
     t.string   "user"
     t.boolean  "specialpay"
     t.boolean  "graveyardshift"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "shift_start"
+    t.datetime "shift_end"
   end
 
   create_table "users", force: true do |t|

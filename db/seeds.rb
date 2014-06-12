@@ -19,6 +19,6 @@ week.each do |day|
   shift_lengths.each_with_index do |a,i|
     #puts timeed(a,day)
     break if a == 24
-    Shift.create(start: timeed(a,day), end: timeed(shift_lengths[i+1],day), desk: "Residence on Fifth", specialpay: false, graveyardshift: false)
+    Shift.create(shift_start: timeed(a,day), shift_end: timeed(shift_lengths[i+1],day), desk: "Residence on Fifth", specialpay: false, graveyardshift: false)
   end
 end
