@@ -3,6 +3,7 @@ Deskmanapp::Application.routes.draw do
   get "shifts/Split_Shift" => redirect("/static/Split_Shift")
   get "static/calendar"
   get "static/home"
+  root "static/calendar"
   resources :shifts
   resources :users
 
