@@ -1,11 +1,11 @@
 Deskmanapp::Application.routes.draw do
+  root "static#calendar"
   get "static/Split_Shift"
   get "shifts/Split_Shift" => redirect("/static/Split_Shift")
   get "static/calendar"
   get "static/home"
   resources :shifts
   resources :users
-  root "static#calendar"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
