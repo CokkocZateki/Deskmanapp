@@ -75,7 +75,7 @@ $(document).ready(function() {
   
   $('button').click(function(event) {
     var hostname = window.location.hostname + "/shifts/";
-    window.location = $(this).text().replace(' ', '_');
+    window.location = $(this).text().replace(/\s/g, '_');
   });
 
 });
