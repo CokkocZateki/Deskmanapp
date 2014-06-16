@@ -18,10 +18,10 @@
   <tbody>
     <% @shifts.each do |shift| %>
       <tr>
-        <td><%= shift.start %></td>
-        <td><%= shift.end %></td>
+        <td><%= shift.shift_start %></td>
+        <td><%= shift.shift_end %></td>
         <td><%= shift.desk %></td>
-        <td><%= shift.user %></td>
+        <td><%= shift.user_id %></td>
         <td><%= shift.specialpay %></td>
         <td><%= shift.graveyardshift %></td>
         <td><%= link_to 'Show', shift %></td>

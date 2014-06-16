@@ -1,11 +1,16 @@
 Deskmanapp::Application.routes.draw do
+  resources :shifts
+  resources :users
+  get "sessions/new"
+  resources :sessions
   get "static/Split_Shift"
   get "shifts/Split_Shift" => redirect("static/Split_Shift")
   get "static/calendar"
   get "static/home"
+  get "sign_up" => "users#new"
+  get "log_in" => "sessions#new"
   root "static#calendar"
-  resources :shifts
-  resources :users
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

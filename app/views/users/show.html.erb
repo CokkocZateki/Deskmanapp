@@ -24,6 +24,26 @@
   <strong>Accesslevel:</strong>
   <%= @user.accesslevel %>
 </p>
+<p>
+  <strong>User shifts:</strong>
+<table> 
+  <thead>
+    <tr>
+      <th><strong>Shift id:</strong></th>
+      <th><strong>Start:</strong></th>
+      <th><strong>End:</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.shifts.each do |s| %>
+      <tr>
+        <td><%= s.id %></td>
+        <td><%= s.shift_start %></td>
+        <td><%= s.shift_end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
