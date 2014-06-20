@@ -10,13 +10,18 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
 //= require_tree .
-//= require fullcalendar
+//= require jquery
+//= require jquery.turbolinks
+//= require jquery_ujs
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
 //= require jquery.ui.resizable
 //= require jquery.ui.selectable
 //= require jquery.ui.sortable
+//= require fullcalendar
+//= require bootstrap
+
+$(document).ready(function () {
+        $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
+    });

@@ -10,12 +10,12 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    if current_user.id != User.find(params[:id]).id
-      flash[:notice] = "You must be logged in as a this user to see their page"
-      redirect_to "/users"
-    else
-      render
-    end
+    #if current_user.id != User.find(params[:id]).id
+    #  flash[:notice] = "You must be logged in as a this user to see their page"
+    #  redirect_to "/users"
+    #else
+    #  render
+    #end
   end
 
   # GET /users/new

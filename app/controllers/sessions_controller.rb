@@ -6,10 +6,17 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
     	session[:user_id] = user.id
-    	redirect_to "/static/calendar", :notice => "Logged In!"
+      flash[:success] = "Logged In!"
+    	redirect_to root_path
     else
-    	flash[:notice] = "Invalid Email or Password"
+      flash[:error] = "Invalid Email or Password"
     	render "new"
     end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    flash[:alert] = "Logged out!"
+    redirect_to root_path
   end
 end

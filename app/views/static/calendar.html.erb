@@ -5,8 +5,8 @@
 $(document).ready(function() {
   var eventslist = <%= get_record %>;
   var selectedEvent;
-  $('#shift-options-menu').hide()
-  $('#new-shift').hide()
+  $('#shift-options-menu').hide();
+  $('#new-shift').hide();
   $('#calendar').fullCalendar({
     eventSources: [
       {
@@ -119,14 +119,14 @@ $(document).ready(function() {
 </style>
 </head>
 <body>
-<h1>Shift Calendar</h1> <br>
+<h1 class='page-header'>Shift Calendar</h1> <br>
 <br>
 <div id='calendar'></div>
-<div id='shift-options-menu'>
-  <button>Sub Shift</button>
-  <button>Split Shift</button>
-  <button>Take This Shift</button>
-  <button>Take This Shift</button>
+<div class='btn-group btn-group-sm' id='shift-options-menu'>
+  <button class='btn btn-default'>Sub Shift</button>
+  <button class='btn btn-default'>Split Shift</button>
+  <button class='btn btn-default'>Take This Shift</button>
+  <button class='btn btn-default'>Take This Shift</button>
 </div>
 </body>
 </html>
