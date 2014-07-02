@@ -1,5 +1,10 @@
-<h1>New shift</h1>
+<h1 class='page-header'>New shift</h1>
 
 <%= render '/shifts/form' %>
 
-<%= link_to 'Back', shifts_path %>
+<div class='container'>
+	<div class='col-xs-1'>
+		<%= link_to 'Back', shifts_path, class: 'btn btn-default' %>
+	</div>
+</div>
+

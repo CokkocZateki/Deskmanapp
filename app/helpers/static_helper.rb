@@ -1,6 +1,6 @@
 module StaticHelper
   def get_record
-    d = Shift.all.select("shift_start", "shift_end","id", "user_id")
+    d = Shift.all.select("shift_start", "shift_end","id", "user_id","specialpay","sub_needed","graveyardshift")
     d = JSON.parse(d.to_json)
     d.each do |a|
     	begin
@@ -8,6 +8,7 @@ module StaticHelper
     	rescue ActiveRecord::RecordNotFound => e
     		next
     	end
+    	a["user_id"] = "#{a["user_id"]} | #{"Sub Needed" if a["sub_needed"]}\n #{"Special Pay" if a["specialpay"]}"
     end
     d = d.to_json
     d.gsub(/shift_/, '').gsub(/user_id/, 'title').html_safe

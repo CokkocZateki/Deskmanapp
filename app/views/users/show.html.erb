@@ -24,26 +24,30 @@
   <strong>Accesslevel:</strong>
   <%= @user.accesslevel %>
 </p>
-<p>
-  <strong>User shifts:</strong>
-<table> 
-  <thead>
-    <tr>
-      <th><strong>Shift id:</strong></th>
-      <th><strong>Start:</strong></th>
-      <th><strong>End:</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user.shifts.each do |s| %>
+<div class='panel panel-default'>
+  <div class='panel-heading'><strong>User shifts:</strong></div>
+  <table class='table'> 
+    <thead>
       <tr>
-        <td><%= s.id %></td>
-        <td><%= s.shift_start %></td>
-        <td><%= s.shift_end %></td>
+        <th><strong>Shift id:</strong></th>
+        <th><strong>Start:</strong></th>
+        <th><strong>End:</strong></th>
+        <th><strong>Graveyard:</strong></th>
+        <th><strong>Special Pay:</strong></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
+    </thead>
+    <tbody>
+      <% @user.shifts.each do |s| %>
+        <tr>
+          <td><%= s.id %></td>
+          <td><%= s.shift_start %></td>
+          <td><%= s.shift_end %></td>
+          <td><%= s.graveyardshift %></td>
+          <td><%= s.specialpay %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

@@ -21,6 +21,7 @@ class ShiftsController < ApplicationController
   def edit
   end
 
+
   # POST /shifts
   # POST /shifts.json
   def create
@@ -69,6 +70,6 @@ class ShiftsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shift_params
-      params.require(:shift).permit(:start, :end, :desk, :user, :specialpay, :graveyardshift)
+      params.require(:shift).permit(:start, :end, :desk, :user, :specialpay, :sub_needed, :graveyardshift)
     end
 end

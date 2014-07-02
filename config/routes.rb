@@ -5,6 +5,8 @@ Deskmanapp::Application.routes.draw do
   resources :sessions
   get "static/Split_Shift"
   get "shifts/Split_Shift" => redirect("static/Split_Shift")
+  get "static/take_shift" => "static#take_shift"
+  get "static/sub_shift"
   get "static/calendar"
   get "static/home"
   get "sign_up" => "users#new"

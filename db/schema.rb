@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140614010045) do
+ActiveRecord::Schema.define(version: 20140622044728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "desks", force: true do |t|
+    t.string   "name"
+    t.boolean  "open"
+    t.datetime "close_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "shifts", force: true do |t|
     t.string   "desk"
@@ -25,6 +33,7 @@ ActiveRecord::Schema.define(version: 20140614010045) do
     t.datetime "shift_start"
     t.datetime "shift_end"
     t.integer  "user_id"
+    t.boolean  "sub_needed"
   end
 
   create_table "users", force: true do |t|

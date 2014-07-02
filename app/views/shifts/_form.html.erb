@@ -1,4 +1,4 @@
-<%= form_for(@shift) do |f| %>
+<%= form_for @shift, html: {class: 'form-horizontal'} do |f| %>
   <% if @shift.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
@@ -11,31 +11,56 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :shift_start %><br>
-    <%= f.datetime_select :shift_start %>
+  <div class="form-group field">
+    <%= f.label :shift_start, class: 'control-label col-sm-2' %>
+    <div class='col-xs-5'>
+      <%= f.datetime_select :shift_start, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :shift_end %><br>
-    <%= f.datetime_select :shift_end %>
+  <div class="form-group field">
+    <%= f.label :shift_end, class: 'control-label col-sm-2' %>
+    <div class='col-xs-5'>
+      <%= f.datetime_select :shift_end, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :desk %><br>
-    <%= f.text_field :desk %>
+  <div class="form-group field">
+    <%= f.label :desk, class: 'control-label col-sm-2' %>
+    <div class='col-xs-3'>
+      <%= f.text_field :desk, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+  <div class="form-group field">
+    <%= f.label :user_id, class: 'control-label col-sm-2' %>
+    <div class='col-xs-3'>
+      <%= f.text_field :user_id, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :specialpay %><br>
-    <%= f.check_box :specialpay %>
+  <div class="form-group field">
+    <div class='col-xs-offset-2'>   
+      <%= f.label :sub_needed do %>
+        <%= f.check_box :sub_needed %>
+        Sub Needed
+      <% end %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :graveyardshift %><br>
-    <%= f.check_box :graveyardshift %>
+  <div class="form-group field">
+    <div class='col-xs-offset-2'>   
+      <%= f.label :specialpay do %>
+        <%= f.check_box :specialpay %>
+        Special Pay
+      <% end %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group field">
+    <div class='col-xs-offset-2'>
+      <%= f.label :graveyardshift do %>
+        <%= f.check_box :graveyardshift %> 
+         Graveyard Shift  
+      <% end %>
+    </div>
+  </div>
+  <div class="form-group actions">
+    <div class='col-sm-2'></div>
+    <%= f.submit class: 'btn btn-default' %>
   </div>
 <% end %>

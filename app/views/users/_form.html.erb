@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for @user, html: {class: 'form-horizontal'} do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,31 +11,44 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
+  <div class="form-group field">
+    <%= f.label :username, class: 'control-label col-sm-2' %>
+    <div class='col-xs-3'>
+      <%= f.text_field :username, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+  <div class="form-group field">
+    <%= f.label :email, class: 'control-label col-sm-2' %>
+    <div class='col-xs-4'>
+      <%= f.text_field :email, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :homedesk %><br>
-    <%= f.text_field :homedesk %>
+  <div class="form-group field">
+    <%= f.label :homedesk, class: 'control-label col-sm-2' %>
+    <div class='col-xs-3'>
+      <%= f.text_field :homedesk, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
+  <div class="form-group field">
+    <%= f.label :password, class: 'control-label col-sm-2' %>
+    <div class='col-xs-3'>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
+  <div class="form-group field">
+    <%= f.label :password_confirmation, class: 'control-label col-sm-2' %>
+    <div class='col-xs-3'>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :accesslevel %><br>
-    <%= f.text_field :accesslevel %>
+  <div class="form-group field">
+    <%= f.label :accesslevel, class: 'control-label col-sm-2' %>
+    <div class='col-xs-2'>
+      <%= f.text_field :accesslevel, class: 'form-control' %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group actions">
+    <div class='col-sm-2'></div
+    <div class='col-xs-4'><%= f.submit class: 'btn btn-default' %></div>
   </div>
 <% end %>

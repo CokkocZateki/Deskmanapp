@@ -14,6 +14,14 @@ $(document).ready(function() {
         color: "black",
       }
     ],
+    eventRender: function(devent, element) {
+      if(devent.sub_needed) {
+        $(element).css({'background-color':'red',
+                      'border-color':'red',
+                      'opacity':0.5
+                      });
+      }
+    },
     allDayDefault: false,
     ignoreTimezone: false,
     defaultView: 'agendaWeek',
@@ -40,9 +48,9 @@ $(document).ready(function() {
         $(this).css('opacity', .5);
         //alert( "Event id is " + calEvent.id);
         //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-        var menux = jsEvent.pageX - 125;
+        var menux = jsEvent.pageX - 100;
         var menuy = jsEvent.pageY - 5;
-        selectedEvent = calEvent.id;
+        selectedEvent = calEvent;
         $('#shift-options-menu').css({"top":menuy,"left":menux}).fadeIn();
 
     },
@@ -72,10 +80,22 @@ $(document).ready(function() {
       event.preventDefault();
     });
   });
+
+  $('#subShift').click(function(event) {
+    $.get("/static/sub_shift", {shift_id: selectedEvent.id}, function() {
+      //window.location = "/shifts/" + selectedEvent;
+      window.location = window.location + "?flash:Shift successfully taken!";
+      //$('#calendar').fullCalendar('rerenderEvents');
+    });
+  });
   
-  $('button').click(function(event) {
-    var hostname = window.location.hostname + "/shifts/";
-    window.location = $(this).text().replace(/\s/g, '_');
+  $('#takeShift').click(function(event) {
+    $.get("/static/take_shift", {shift_id: selectedEvent.id}, function() {
+      window.location = window.location;
+      //window.location = "/shifts/" + selectedEvent;
+    });
+    //var hostname = window.location.hostname + "/shifts/";
+    //window.location = $(this).text().replace(/\s/g, '_').toLowerCase();
   });
 
 });
@@ -92,22 +112,9 @@ $(document).ready(function() {
   #shift-options-menu {
     position: absolute;
     top: 0;
-    background-color: black;
     z-index: 100;
-    display: inline-block;
   }
 
-  #new-shift {
-    position: absolute;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 10px 10px 2px 2px rgba(0,0,0,0.3);
-    top: 50%;
-    left: 50%;
-    margin-left: -200px;
-    margin-top: -150px;
-    z-index: 101;
-  }
 
 </style>
 </head>
@@ -115,11 +122,14 @@ $(document).ready(function() {
 <h1 class='page-header'>Shift Calendar</h1> <br>
 <br>
 <div id='calendar'></div>
-<div class='btn-group btn-group-sm' id='shift-options-menu'>
-  <button class='btn btn-default'>Sub Shift</button>
-  <button class='btn btn-default'>Split Shift</button>
-  <button class='btn btn-default'>Take This Shift</button>
-  <button class='btn btn-default'>Take This Shift</button>
+<div id='shift-options-menu' class='panel'>
+  <div class='btn-group btn-group-xs'>
+    <button id='subShift' class='btn btn-default'>Sub Shift</button>
+    <button id='takeShift' class='btn btn-default'>Take Shift</button>
+    
+    <!-- <button class='btn btn-default'>Split Shift</button> -->
+    <!-- <button class='btn btn-default'>View Shift</button> -->
+  </div>
 </div>
 </body>
 </html>

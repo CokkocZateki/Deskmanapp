@@ -20,11 +20,23 @@ week.each do |day|
   shift_lengths.each_with_index do |a,i|
     #puts timeed(a,day)
     break if a == 24
-    Shift.create(shift_start: timeed(a,day), shift_end: timeed(shift_lengths[i+1],day), desk: "Residence on Fifth", user_id: day+1, specialpay: false, graveyardshift: false)
+    Shift.create(shift_start: timeed(a,day), shift_end: timeed(shift_lengths[i+1],day), desk: "Residence on Fifth", user_id: day+1, specialpay: false, sub_needed: false, graveyardshift: false)
   end
 end
 
 # Create a user as admin
 
-User.create(username:"cvm",email:"cvm@andrew.cmu.edu",homedesk:"Rez",password:"blah",password_confirmation:"blah",accesslevel:"admin")
+User.create(username:"cvm",email:"cvm@andrew.cmu.edu",homedesk:"Residence on Fifth",password:"blah",password_confirmation:"blah",accesslevel:"admin")
+
+# Create the desks
+
+Desk.create(name:"Residence on Fifth",open: true)
+Desk.create(name:"Hill",open: true)
+Desk.create(name:"Stever",open: true)
+Desk.create(name:"Morewood",open: true)
+Desk.create(name:"Mudge",open: true)
+Desk.create(name:"Donner",open: true)
+Desk.create(name:"West Wing",open: true)
+
+
 puts "Finished Seeding Database"
