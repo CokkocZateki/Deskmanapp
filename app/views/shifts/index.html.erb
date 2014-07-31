@@ -1,4 +1,7 @@
-<h1 class='page-header'>Listing shifts <%= link_to 'New Shift', new_shift_path, class: 'btn btn-default' %>
+<h1 class='page-header'>Listing shifts 
+<% if current_user && (current_user.accesslevel == 'admin') %>  
+  <%= link_to 'New Shift', new_shift_path, class: 'btn btn-default' %>
+<% end %>
 </h1>
 <table class='table'>
   <thead>
@@ -19,20 +22,22 @@
 
   <tbody>
     <% @shifts.each do |shift| %>
-      <tr>
+      <tr class=<%= 'danger' if shift.sub_needed %> >
         <td><%= shift.id %></td>
-        <td><%= shift.shift_start %></td>
-        <td><%= shift.shift_end %></td>
-        <td><%= shift.desk %></td>
-        <td><%= shift.user_id %></td>
+        <td><%= shift.shift_start.asctime %></td>
+        <td><%= shift.shift_end.asctime %></td>
+        <td><%= Desk.find_by_id(shift.desk_id).name %></td>
+        <td><%= User.find_by_id(shift.user_id).username %></td>
         <td><%= shift.sub_needed %></td>
         <td><%= shift.specialpay %></td>
         <td><%= shift.graveyardshift %></td>
         <td>
           <div class='btn-group btn-default btn-group-xs'>
             <%= link_to 'Show', shift, class: 'btn btn-default' %>
-            <%= link_to 'Edit', edit_shift_path(shift), class: 'btn btn-default' %>
-            <%= link_to 'Destroy', shift, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+            <% if current_user && (current_user.accesslevel == 'admin') %>
+              <%= link_to 'Edit', edit_shift_path(shift), class: 'btn btn-default' %>
+              <%= link_to 'Destroy', shift, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+            <% end %>
           </div>
         </td>
       </tr>

@@ -5,6 +5,8 @@
 $(document).ready(function() {
   var eventslist = <%= get_record %>;
   var selectedEvent;
+  var cssEvent;
+  var rezColor = 'black';
   $('#shift-options-menu').hide();
   $('#new-shift').hide();
   $('#calendar').fullCalendar({
@@ -45,12 +47,12 @@ $(document).ready(function() {
     },
     eventClick: function(calEvent, jsEvent, view) {
         // change the border color just for fun
-        $(this).css('opacity', .5);
         //alert( "Event id is " + calEvent.id);
         //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
         var menux = jsEvent.pageX - 100;
         var menuy = jsEvent.pageY - 5;
         selectedEvent = calEvent;
+        cssEvent = $(this);
         $('#shift-options-menu').css({"top":menuy,"left":menux}).fadeIn();
 
     },
@@ -82,16 +84,51 @@ $(document).ready(function() {
   });
 
   $('#subShift').click(function(event) {
-    $.get("/static/sub_shift", {shift_id: selectedEvent.id}, function() {
+    $.ajax({
+      url: "/static/sub_shift", 
+      data: {shift_id: selectedEvent.id},
+      success: function(data,status) {
       //window.location = "/shifts/" + selectedEvent;
-      window.location = window.location + "?flash:Shift successfully taken!";
+      //window.location.href = window.location.href;
       //$('#calendar').fullCalendar('rerenderEvents');
+        $('#callback-flash')
+        .addClass('alert-success').removeClass('alert-danger')
+        .text(data);
+        $(cssEvent).css({'background-color':'red',
+                        'border-color':'red',
+                        'opacity':0.5
+                        });
+      },
+      error: function(data,status) {
+        $('#callback-flash')
+        .addClass('alert-danger').removeClass('alert-success')
+        .text(data.responseText); 
+      }      
     });
   });
   
   $('#takeShift').click(function(event) {
-    $.get("/static/take_shift", {shift_id: selectedEvent.id}, function() {
-      window.location = window.location;
+    $.ajax({
+      url: "/static/take_shift", 
+      data: {shift_id: selectedEvent.id},
+      success: function(data,status) {
+        $('#callback-flash')
+        .addClass('alert-success').removeClass('alert-danger')
+        .text(data);
+        $(cssEvent).css({'background-color': rezColor,
+                  'border-color': rezColor,
+                  'opacity': 1
+                  });
+      },
+      error: function(data,status) {
+        $('#callback-flash')
+        .addClass('alert-danger').removeClass('alert-success')
+        .text(data.responseText);  
+        $(cssEvent).css({'background-color': rezColor,
+          'border-color': rezColor,
+          'opacity': 1
+          });
+      }  
       //window.location = "/shifts/" + selectedEvent;
     });
     //var hostname = window.location.hostname + "/shifts/";
@@ -120,6 +157,7 @@ $(document).ready(function() {
 </head>
 <body>
 <h1 class='page-header'>Shift Calendar</h1> <br>
+<p id='callback-flash' class='alert'></p>
 <br>
 <div id='calendar'></div>
 <div id='shift-options-menu' class='panel'>

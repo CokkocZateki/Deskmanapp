@@ -1,4 +1,6 @@
 Deskmanapp::Application.routes.draw do
+  get "shifts/create_shifts"
+  post "shifts/create_shifts" => "shifts#created_shifts"
   resources :shifts
   resources :users
   get "sessions/new"
@@ -6,13 +8,13 @@ Deskmanapp::Application.routes.draw do
   get "static/Split_Shift"
   get "shifts/Split_Shift" => redirect("static/Split_Shift")
   get "static/take_shift" => "static#take_shift"
-  get "static/sub_shift"
+  get "static/sub_shift" => "static#sub_shift"
   get "static/calendar"
   get "static/home"
   get "sign_up" => "users#new"
   get "log_in" => "sessions#new"
   get "log_out" => "sessions#destroy"
-  root "static#calendar"
+  root "sessions#new"
 
 
   # The priority is based upon order of creation: first created -> highest priority.

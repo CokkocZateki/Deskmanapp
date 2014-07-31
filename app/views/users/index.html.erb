@@ -1,11 +1,14 @@
-<h1 class='page-header'>Listing users <%= link_to 'New User', new_user_path, class: 'btn btn-default'  %></h1>
-
+<h1 class='page-header'>Listing users
+<% if current_user && (current_user.accesslevel == 'admin') %>
+  <%= link_to 'New User', new_user_path, class: 'btn btn-default'  %>
+<% end %>
+</h1>
 <table class='table'>
   <thead>
     <tr>
       <th>Username</th>
       <th>Email</th>
-      <th>Homedesk</th>
+      <th>Home Desk</th>
       <th>Accesslevel</th>
       <th></th>
       <th></th>
@@ -18,13 +21,15 @@
       <tr>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
-        <td><%= user.homedesk %></td>
+        <td><%= Desk.all.find_by_id(user.desk_id).name %></td>
         <td><%= user.accesslevel %></td>
         <td>
           <div class='btn-group'>
             <%= link_to 'Show', user, class: 'btn' %>
-            <%= link_to 'Edit', edit_user_path(user), class: 'btn'  %>
-            <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn'  %>
+            <% if current_user && (current_user.accesslevel == 'admin') %>
+              <%= link_to 'Edit', edit_user_path(user), class: 'btn'  %>
+              <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn'  %>
+            <% end %>
           </div>
         </td>
       </tr>

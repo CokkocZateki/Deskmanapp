@@ -1,31 +1,39 @@
 <p id="notice"><%= notice %></p>
+<div class='list-group'>
+  <p class='list-group-item'>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+  <p class='list-group-item'>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <p class='list-group-item'>
+    <strong>Home Desk:</strong>
+    <%= Desk.find_by_id(@user.desk_id).name %>
+  </p>
 
-<p>
-  <strong>Homedesk:</strong>
-  <%= @user.homedesk %>
-</p>
+  <p class='list-group-item'>
+    <strong>Password:</strong>
+    <%= @user.password %>
+  </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
-<p>
-  <strong>Accesslevel:</strong>
-  <%= @user.accesslevel %>
-</p>
+  <div class='list-group-item'>
+    <strong>Accesslevel:</strong>
+    <%= @user.accesslevel %>
+  </div>
+</div>
 <div class='panel panel-default'>
-  <div class='panel-heading'><strong>User shifts:</strong></div>
+  <div class='panel-heading'><strong>User shifts:</strong>
+    <div class='btn-group btn-default btn-group-sm text-right'>
+      <% if (current_user == @user) || (current_user.accesslevel == 'admin') %>
+        <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-default' %>
+      <% end %>
+      <%= link_to 'Back', users_path, class: 'btn btn-default' %>
+    </div>
+  </div>
   <table class='table'> 
     <thead>
       <tr>
@@ -34,20 +42,34 @@
         <th><strong>End:</strong></th>
         <th><strong>Graveyard:</strong></th>
         <th><strong>Special Pay:</strong></th>
+        <th><strong>Sub Needed:</strong></th>
       </tr>
     </thead>
     <tbody>
       <% @user.shifts.each do |s| %>
-        <tr>
+        <tr class=<%= 
+          if s.sub_needed
+            'danger'
+          elsif s.graveyardshift
+            'warning'
+          elsif s.specialpay
+            'success'
+          end
+         %>>
           <td><%= s.id %></td>
           <td><%= s.shift_start %></td>
           <td><%= s.shift_end %></td>
           <td><%= s.graveyardshift %></td>
           <td><%= s.specialpay %></td>
+          <td><%= s.sub_needed %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class='btn-group btn-default btn-group-sm'>
+  <% if (current_user == @user) || (current_user.accesslevel == 'admin') %>
+    <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-default' %>
+  <% end %>
+  <%= link_to 'Back', users_path, class: 'btn btn-default' %>
+</div>

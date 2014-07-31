@@ -30,6 +30,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    #user_params["desk"] = Desk.all.find_by_id(user_params["desk"])
+    puts "Chosen desk: #{user_params["desk_id"]}"
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -75,6 +77,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :homedesk, :password, :password_confirmation, :accesslevel)
+      params.require(:user).permit(:username, :email, :desk_id, :password, :password_confirmation, :accesslevel)
     end
 end

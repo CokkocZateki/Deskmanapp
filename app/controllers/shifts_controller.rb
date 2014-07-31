@@ -38,6 +38,18 @@ class ShiftsController < ApplicationController
     end
   end
 
+  # POST /shifts/create_shifts
+  def create_shifts
+    # puts "The year is: #{params['shifts_start']['year']}"
+    # puts "The next year is: #{params['shifts_end']['year']}"
+  end
+
+  def created_shifts
+    puts "The year is: #{params['shifts_start']['year']}"
+    puts "The next year is: #{params['shifts_end']['year']}"
+    redirect_to '/shifts/create_shifts'
+  end
+
   # PATCH/PUT /shifts/1
   # PATCH/PUT /shifts/1.json
   def update
@@ -70,6 +82,6 @@ class ShiftsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shift_params
-      params.require(:shift).permit(:start, :end, :desk, :user, :specialpay, :sub_needed, :graveyardshift)
+      params.require(:shift).permit(:start, :end, :desk_id, :user_id, :specialpay, :sub_needed, :graveyardshift)
     end
 end
