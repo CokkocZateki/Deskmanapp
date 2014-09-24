@@ -1,4 +1,11 @@
 Deskmanapp::Application.routes.draw do
+  devise_for :users
+  devise_scope :user do 
+    # root to: 'static_pages#home'
+    get '/users/sign_out' => 'devise/sessions#destroy'
+    match '/sessions/user', to: 'devise/sessions#create', via: :post
+  end
+  root "static#calendar"
   get "shifts/create_shifts"
   post "shifts/create_shifts" => "shifts#created_shifts"
   resources :shifts
@@ -11,10 +18,10 @@ Deskmanapp::Application.routes.draw do
   get "static/sub_shift" => "static#sub_shift"
   get "static/calendar"
   get "static/home"
-  get "sign_up" => "users#new"
-  get "log_in" => "sessions#new"
-  get "log_out" => "sessions#destroy"
-  root "sessions#new"
+  # get "sign_up" => "users#new"
+  # get "log_in" => "sessions#new"
+  # get "log_out" => "sessions#destroy"
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

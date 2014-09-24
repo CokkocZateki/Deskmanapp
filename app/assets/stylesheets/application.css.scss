@@ -11,8 +11,8 @@
  *= require_self
  *= require_tree .
  *= require fullcalendar
- *= require jquery.ui.selectable
- *= require jquery.ui.resizable
+ *= require jquery-ui/selectable
+ *= require jquery-ui/resizable
  */
 
 @import "bootstrap";

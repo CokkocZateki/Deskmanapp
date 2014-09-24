@@ -1,5 +1,5 @@
 <h1 class='page-header'>Listing users
-<% if current_user && (current_user.accesslevel == 'admin') %>
+<% if current_user %>
   <%= link_to 'New User', new_user_path, class: 'btn btn-default'  %>
 <% end %>
 </h1>
@@ -9,7 +9,7 @@
       <th>Username</th>
       <th>Email</th>
       <th>Home Desk</th>
-      <th>Accesslevel</th>
+      <th>Role</th>
       <th></th>
       <th></th>
       <th></th>

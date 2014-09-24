@@ -1,6 +1,7 @@
 <h1 class='page-header'>Listing shifts 
 <% if current_user && (current_user.accesslevel == 'admin') %>  
   <%= link_to 'New Shift', new_shift_path, class: 'btn btn-default' %>
+  <%= link_to 'New Shift', _path, class: 'btn btn-default' %>
 <% end %>
 </h1>
 <table class='table'>
@@ -32,11 +33,11 @@
         <td><%= shift.specialpay %></td>
         <td><%= shift.graveyardshift %></td>
         <td>
-          <div class='btn-group btn-default btn-group-xs'>
+          <div class='btn-group btn-group-xs'>
             <%= link_to 'Show', shift, class: 'btn btn-default' %>
-            <% if current_user && (current_user.accesslevel == 'admin') %>
+            <% if current_user.can? %>
               <%= link_to 'Edit', edit_shift_path(shift), class: 'btn btn-default' %>
-              <%= link_to 'Destroy', shift, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %>
+              <%= link_to 'Destroy', shift, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
             <% end %>
           </div>
         </td>

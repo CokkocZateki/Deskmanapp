@@ -21,14 +21,14 @@
   </p>
 
   <div class='list-group-item'>
-    <strong>Accesslevel:</strong>
-    <%= @user.accesslevel %>
+    <strong>Role:</strong>
+    <%= @user.role %>
   </div>
 </div>
 <div class='panel panel-default'>
   <div class='panel-heading'><strong>User shifts:</strong>
     <div class='btn-group btn-default btn-group-sm text-right'>
-      <% if (current_user == @user) || (current_user.accesslevel == 'admin') %>
+      <% if (current_user == @user) %>
         <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-default' %>
       <% end %>
       <%= link_to 'Back', users_path, class: 'btn btn-default' %>
@@ -68,7 +68,7 @@
   </table>
 </div>
 <div class='btn-group btn-default btn-group-sm'>
-  <% if (current_user == @user) || (current_user.accesslevel == 'admin') %>
+  <% if (current_user == @user) %>
     <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-default' %>
   <% end %>
   <%= link_to 'Back', users_path, class: 'btn btn-default' %>

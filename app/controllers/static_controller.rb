@@ -1,20 +1,23 @@
 class StaticController < ApplicationController
+  before_action :authenticate_user!
+
   def home
-  	if session[:user_id]
-      redirect_to "/users/#{session[:user_id]}"
-    else
-      redirect_to login_path
-    end
+  	# if session[:user_id]
+   #    redirect_to "/users/#{session[:user_id]}"
+   #  else
+   #    redirect_to login_path
+   #  end
   end
 
   def calendar
+    puts current_user
   end
 
   def take_shift
     @shift = Shift.find_by_id(params[:shift_id])
-    if session[:user_id] && (@shift.sub_needed == true)
+    if current_user && (@shift.sub_needed == true)
     	puts "This is params: #{params}"
-    	@shift.user_id = session[:user_id]
+    	@shift.user_id = current_user.id
     	@shift.sub_needed = false
     	@shift.save
     	puts @shift
@@ -35,8 +38,10 @@ class StaticController < ApplicationController
 
   def sub_shift
     @shift = Shift.find_by_id(params[:shift_id])
-    user_owns_shift = (@shift.user_id == session[:user_id])
-    if session[:user_id] && user_owns_shift && (@shift.sub_needed == false)
+    user_owns_shift = (@shift.user_id == current_user.id)
+    puts user_owns_shift
+    puts @shift.sub_needed
+    if current_user && user_owns_shift && (@shift.sub_needed == false)
     	@shift = Shift.find_by_id(params[:shift_id])
     	@shift.sub_needed = true
     	@shift.save

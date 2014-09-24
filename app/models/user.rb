@@ -1,28 +1,33 @@
 class User < ActiveRecord::Base
-	has_secure_password
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 	has_many :shifts
 	has_one :desk
 
-	validates :username, length: { minimum: 2 }, uniqueness: true
+	ROLES = %i[admin manager supervisor attendant]
+
 	validates :email, uniqueness: true, format: { 
 		with: /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/,
 		message: 'Please enter a valid email'
 	}
-	validates :desk_id,  with: :valid_desk_id
-	validates :accesslevel, with: :valid_accesslevel
+	# validates :password, :length => ()
 
-	def valid_accesslevel
-		puts "#{self.accesslevel} is the accesslevel"
-		puts "true" if self.accesslevel == "attendant"
-		if self.accesslevel == "admin"
-			nil
-		elsif self.accesslevel == "attendant"
-			nil
-		elsif self.accesslevel == "GC"
-			nil
-		else
-			errors.add(:base, 'Invalid accesslevel')
-		end
+	def self.admin?
+		return self.role == 'admin' ? true : false
+	end
+
+	def self.manager?
+		return self.role == 'manager' ? true : false
+	end
+
+	def self.supervisor?
+		return self.role == 'supervisor' ? true : false
+	end
+
+	def self.attendant?
+		return self.role == 'attendant' ? true : false
 	end
 
 	def valid_desk_id

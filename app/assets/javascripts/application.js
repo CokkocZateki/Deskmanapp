@@ -14,11 +14,11 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require jquery.ui.draggable
-//= require jquery.ui.droppable
-//= require jquery.ui.resizable
-//= require jquery.ui.selectable
-//= require jquery.ui.sortable
+//= require jquery-ui/draggable
+//= require jquery-ui/droppable
+//= require jquery-ui/resizable
+//= require jquery-ui/selectable
+//= require jquery-ui/sortable
 //= require fullcalendar
 //= require bootstrap
 

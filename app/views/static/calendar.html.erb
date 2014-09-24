@@ -23,6 +23,11 @@ $(document).ready(function() {
                       'opacity':0.5
                       });
       }
+      if(devent.id == 1) {
+        $(element).css({'background-color':'green',
+                      'border-color':'green'
+                      });
+      }
     },
     allDayDefault: false,
     ignoreTimezone: false,
@@ -86,7 +91,7 @@ $(document).ready(function() {
   $('#subShift').click(function(event) {
     $.ajax({
       url: "/static/sub_shift", 
-      data: {shift_id: selectedEvent.id},
+      data: {shift_id: selectedEvent.shift_id},
       success: function(data,status) {
       //window.location = "/shifts/" + selectedEvent;
       //window.location.href = window.location.href;
@@ -110,7 +115,7 @@ $(document).ready(function() {
   $('#takeShift').click(function(event) {
     $.ajax({
       url: "/static/take_shift", 
-      data: {shift_id: selectedEvent.id},
+      data: {shift_id: selectedEvent.shift_id},
       success: function(data,status) {
         $('#callback-flash')
         .addClass('alert-success').removeClass('alert-danger')
@@ -134,7 +139,15 @@ $(document).ready(function() {
     //var hostname = window.location.hostname + "/shifts/";
     //window.location = $(this).text().replace(/\s/g, '_').toLowerCase();
   });
-
+  $('#turnOffRez').click(function( event ) {
+    $('#calendar').fullCalendar('removeEvents', 1);
+  });
+  $('#turnOffOther').click(function( event ) {
+    $('#calendar').fullCalendar('removeEvents', 2);
+  });
+  $('#reRenderBlah').click(function( event ) {
+    $('#calendar').fullCalendar('reFetchEvents');
+  });
 });
 
 
@@ -160,6 +173,9 @@ $(document).ready(function() {
 <p id='callback-flash' class='alert'></p>
 <br>
 <div id='calendar'></div>
+<button id='turnOffRez' class='btn btn-default'>Remove Rez</button>
+<button id='turnOffOther' class='btn btn-default'>Remove Other</button>
+<button id='reRenderBlah' class='btn btn-default'>Refetch</button>
 <div id='shift-options-menu' class='panel'>
   <div class='btn-group btn-group-xs'>
     <button id='subShift' class='btn btn-default'>Sub Shift</button>
